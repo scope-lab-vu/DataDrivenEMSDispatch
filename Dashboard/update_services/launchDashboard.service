@@ -1,0 +1,12 @@
+[Unit]
+Description=NFD Visualization Dashboard
+After=multi-user.target
+
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python /home/vol-gpettet/analytics-dashboard/run.py
+StandardInput=tty-force
+
+[Install]
+WantedBy=multi-user.target

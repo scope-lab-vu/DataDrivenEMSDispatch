@@ -1,0 +1,561 @@
+/* <html> <div> <body> */
+body {
+    position: static;
+    height: 1200px;
+    background-color: rgba(0,0,0,0.85);
+    overflow-x: hidden;
+}
+
+#logo {
+    position: fixed;
+    z-index: 5;
+    top: 0;
+    right: 0;
+    height: 57px;
+    left: 0;
+    padding-top: 0;
+    text-align: center;
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 40px;
+    color: whitesmoke;
+    background-color: black;
+}
+
+.container {
+    position: fixed;
+    top: 80px;
+    width: 55px;
+    display: inline-block;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.socialMediaBox {
+    position: fixed;
+    top: 80px;
+    width: 55px;
+    display: inline-block;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.bar1, .bar2, .bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: #4eff35;
+    margin: 6px 0;
+    transition: 0.4s;
+    z-index: 10;
+}
+.container:hover {
+    opacity: 0.7;
+}
+
+.change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .bar2 {
+    opacity: 0;
+}
+
+.change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px);
+    transform: rotate(45deg) translate(-8px, -8px);
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 8;
+    top: 58px;
+    left: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: 0.5s;
+    padding-top: 130px;
+    font-family: 'Alegreya Sans SC', sans-serif;
+    color: black;
+    background-color: rgba(226, 222, 215, 0.98);
+    background-repeat: no-repeat;
+    line-height: 20px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 10px;
+    font-size: 25px;
+    transition: 0.3s;
+    cursor: pointer;
+    color: black
+}
+
+.sidenav b {
+    display: block;
+    padding: 8px 8px 8px 12px;
+    font-family: 'Arial';
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    box-shadow: 0 0 1em grey;
+}
+.sidenav a:active, a:visited, a:focus {
+    text-decoration: none;
+}
+
+@media screen and (max-height: 1000px) {
+    .sidenav {
+        padding-top: 75px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+.sidemenu {
+    position: absolute;
+    color: black;
+    background-color: #e2e2e2;
+    height: 410px;
+    width: 0;
+    z-index: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: 0.5s;
+    font-family: 'Alegreya Sans SC', sans-serif;
+    background-repeat: no-repeat;
+    box-shadow: 0 5px 5px rgba(0,0,0,.6);
+}
+
+.sidemenu a {
+    display: block;
+    padding: 8px 8px 1px 8px;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.playground {
+    position: relative;
+    width: 90%;
+    height: inherit;
+    top: 80px;
+    left: 5%;
+    color: white;
+    font-size: 40px;
+    font-family: 'Alegreya Sans SC', sans-serif;
+    /*border: 0.3px solid white;*/
+}
+
+.card {
+    padding: 15px;
+}
+
+.title {
+    background-color: rgba(13, 18, 27, 0.85);
+    width: 100%;
+    height: 20px;
+    color: white;
+    font-family: "Copperplate";
+    font-size: larger;
+}
+
+.column {
+    float: left;
+    font-size: 15px;
+    height: 500px;
+    border: 0.5px solid #4f4f4f;
+    box-shadow: 10px 10px 20px #292929;
+    padding: 0;
+    margin-bottom: 25px;
+    margin-left: 30px;
+    background-color: rgba(13, 18, 27, 0.69);
+}
+
+/* element name */
+#map {
+    height: 410px;
+    width: inherit;
+}
+
+#floating-panel {
+    position: absolute;
+    top: 36px;
+    width: inherit;
+    text-align: center;
+}
+
+#sliderGround {
+    position: absolute;
+    height: 50px;
+    width: inherit;
+    text-align: center;
+    font-family: 'PT Sans', sans-serif;
+    color: white;
+}
+
+/* loader */
+#loader {
+    border: 8px solid #5a5a5a;
+    border-radius: 50%;
+    border-top: 8px solid #D9AC42;
+    width: 45px;
+    height: 45px;
+    margin: auto;
+    animation: spin 1.5s cubic-bezier(0.1, 0.5, 0.2, 0.1) infinite;
+    z-index: 2;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* d3 bar */
+text {
+    font: 10px sans-serif;
+    color: white;
+    text-align: left;
+}
+
+text.value {
+    font-size: 120%;
+    fill: white;
+}
+
+/* d3 pie */
+.arc text {
+    font: 10px sans-serif;
+    text-anchor: middle;
+}
+
+.arc path {
+    stroke: #fff;
+}
+
+.bar div {
+    font: 10px sans-serif;
+    background-color: steelblue;
+    text-align: right;
+    padding: 3px;
+    margin: 3px;
+    color: white;
+}
+
+.pie div {
+    font: 10px sans-serif;
+}
+
+/* Popup container - "help" */
+/* class */
+.popup {
+    position: absolute;
+    cursor: help;
+    width: 4%;
+    bottom: 40px;
+    left: 20px;
+    border-style: solid;
+    border-radius: 3px;
+    border-color: #424139;
+    border-width: 1px;
+    z-index: 5;
+    text-align: center;
+    background-color: #000000;
+    color: #4eff35;
+}
+
+/* The actual popup */
+.popup .popuptext {
+    visibility: hidden;
+    width: 400px;
+    background-color: #1e1e1e;
+    color: #4eff35;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    top: -110%;
+    left: 10%;
+    margin-left: -20px;
+}
+
+/* arrow */
+.popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 9%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #4eff35 transparent transparent transparent;
+}
+
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+hr {
+    margin-left: 2px;
+    margin-right: 20px;
+    opacity: 0.5;
+}
+
+/* no ui slider */
+#slider {
+    width: inherit;
+}
+
+.example-val {
+    color: white;
+    display: inline-block;
+}
+
+/* over-writing the nouislider css */
+.noUi-connect {
+    background: #D69560;
+}
+
+/* the actual handle */
+#slider.noUi-horizontal .noUi-handle {
+    width: 12px;
+    height: 28px;
+    left: -7px;
+    top: -6px;
+    background: rgba(255, 255, 255, 0.86);
+}
+#sliderNew.noUi-horizontal .noUi-handle {
+    width: 18px;
+    left: -2px;
+    border: 1px outset #174c86;
+    border-radius: 8px;
+}
+
+/* two strips on handle*/
+.noUi-handle:before,
+.noUi-handle:after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 14px;
+    width: 1px;
+    background: #855f18;
+    left: 4px;
+    top: 6px;
+}
+
+/* submit button */
+.button {
+    background-color: floralwhite;
+    border: 0.2px solid #BEBEBE;
+    color: black;
+    padding: 3px 3px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    box-shadow: 0 3px 4px rgba(0,0,0,.3);
+}
+
+/* button to change modes */
+.buttonChangeMode {
+    background-color: white;
+    border: 1px solid #BEBEBE;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.buttonChangeMode:hover {
+    text-decoration: underline;
+    background-color: #83c985;
+}
+
+
+/* social media */
+.fa {
+    padding: 5px;
+    font-size: 15px;
+    width: 15px;
+    text-align: center;
+}
+
+
+.fa:hover {
+    opacity: 0.7;
+}
+.fa-at {
+    background: whitesmoke;
+    color: black;
+}
+
+.fa-google {
+    background: #bb0000;
+    color: white;
+}
+
+.fa-github {
+    background: whitesmoke;
+    color: black;
+}
+
+.input {
+    text-align: center;
+}
+
+.loading {
+    text-align: match-parent;
+}
+
+.loadingMsg {
+    text-align: match-parent;
+}
+
+.input input {
+    border-radius: 3px;
+    border: 1px solid black;
+    height: 16px;
+    padding: 1px;
+    margin: 1px;
+    font-family: Geneva;
+    border: 0.2px solid #BEBEBE;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 24px;
+}
+
+/* slider for toggle in side nav*/
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 1px;
+    top: 1px;
+    background-color: white;
+    border: 1px solid grey;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+#bottomHint {
+    position: relative;
+    bottom: 0;
+    left:0;
+    right:0;
+    height: 430px;
+    background-color: transparent;
+    font-family: 'Arial';
+    font-size: 11px;
+    opacity: 0.7;
+}
+.buttonSideMenu {
+    cursor: pointer; 
+    position: absolute; 
+    z-index: 2; 
+    color: #666666; 
+    background-color: whitesmoke; 
+    margin: 10px; 
+    width: 30px;
+    border: 1px solid lightgray;
+}
+
+.buttonSideMenu:hover {
+    box-shadow: 0 0 1em grey;
+}
+
+input:checked + .slider {
+    background-color: rgb(102, 248, 255);
+}
+
+input:checked + .slider:before {
+    transform: translateX(16px);
+}
+
+.icon-bar {
+    position: absolute;
+    right: 73px;
+    top: 30px;
+    height: 67px;
+    background-color: whitesmoke;
+    width: 47px;
+    padding: 5px;
+    margin: 7px;
+    font-size: 27px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px darkgrey;
+    z-index: 2;
+}
+
+
+input:checked + .box {
+    background-color: #ffe55f;
+    width: 40px;
+    text-align: right;
+    border: 2px inset gold;
+    opacity: 1;
+}
+
+.checkbox {
+    position: absolute;
+}
+
+.box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    background-color: floralwhite;
+    text-align: left;
+    border: 1px solid lightgrey;
+    opacity: 0.5;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.box:hover {
+    opacity: 1;
+    box-shadow: 0 0 5px lightgrey;
+}
+
+#initialHint {
+    position: absolute; 
+    z-index: 3; 
+    background-color: rgba(0,0,0,0.84); 
+    width: inherit; 
+    height: 60px;
+}

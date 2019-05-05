@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Transit-HUB Analytics Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="./static/assets/css/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:100|Shadows+Into+Light|Lato:100i|Zilla+Slab"
+          rel="stylesheet">
+</head>
+
+<body>
+    <!-- <div id="nav-bar"><div id="logo">Transit-Hub Analytics Dashboard</div><span id="time-label"></span></div> -->
+    <div id="nav-bar">
+	    <div id="logo-incident">
+	    	<img src="https://admissions.vanderbilt.edu/insidedores/manage/wp-content/uploads/vanderbilt-logo-2008.gif"
+	             width="45" height="45" style="position:absolute; left: 5px; " />
+		    <div style="position: absolute; font-family: 'Arial'; font-size: 15px; left:65px;top:15px;border-radius:4px;border: 1px solid #fff;padding: 4px;"><a href="{{ url_for('index') }}" style="text-decoration: none;color:#fff;">Incident</a></div>
+		    <div style="position: absolute; font-family: 'Arial'; font-size: 15px; left:140px;top:15px;border-radius:4px;border: 1px solid #dca600;padding:4px;"><a href="{{ url_for('transitPlot') }}" style="text-decoration: none;color:#dca600;">Transit</a></div>
+		    <div id="time-label" style="position:absolute; right: 5px; top: 20px;color: white;font-family: 'Arial'; font-size: 15px;"></div>
+		    T-HUB Analytics
+	    </div>
+	    
+    </div>
+    <div id="content-wrapper">
+      <div id="map">
+      </div>
+      <div id="side-bar" style="background-color: rgba(0,0,0,0.85) !important;">
+        <div class="side-bar-title">Map View</div>
+        <div class="side-bar-options">
+          <div class="dropdown">
+            <button class="dropbtn" id="dropbtn-map">Shared Segments</button>
+            <div class="dropdown-content" id="dropdown-map">
+              <!-- <a href="#">Route 3</a> -->
+              <a href='javascript:void(0);' onclick='map_dropdown_selected("Shared Segments", 0)'>Shared Segments</a>
+              <a href='javascript:void(0);' onclick='map_dropdown_selected("May - Original Performance", 1)'>May - Original Performance</a>
+              <a href='javascript:void(0);' onclick='map_dropdown_selected("May - Optimized Performance", 2)'>May - Optimized Performance</a>
+               <a href='javascript:void(0);' onclick='map_dropdown_selected("June - Original Performance", 3)'>June - Original Performance</a>
+              <a href='javascript:void(0);' onclick='map_dropdown_selected("June - Optimized Performance", 4)'>June - Optimized Performance</a>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="side-bar-title">Options</div>
+        <div class="side-bar-options">
+          <!-- <input type="checkbox" id="hide-overlay" name="hide-overlay" value="hide-overlay" onclick="hide_overlay();"> Hide overlay layer<br> -->
+          Route:
+          <div class="dropdown">
+            <button class="dropbtn" id="dropbtn-route"></button>
+            <div class="dropdown-content" id="dropdown-route">
+              <!-- <a href="#">Route 3</a> -->              
+            </div>
+          </div>
+          <hr/>
+          Direction:
+          <div class="dropdown">
+            <button class="dropbtn" id="dropbtn-direction"></button>
+            <div class="dropdown-content" id="dropdown-direction">
+            </div>
+          </div>
+          <hr/>
+          Departure Time:
+          <div class="dropdown">
+            <button class="dropbtn" id="dropbtn-departuretime"></button>
+            <div class="dropdown-content" id="dropdown-departuretime">
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="side-bar-title">Delay Prediction <span class="realtime-label">REAL-TIME</span></div>
+        <div class="side-bar-options" id="prediction-div">
+
+        </div>
+        
+      </div>
+    </div>
+    <script>
+    navigator = navigator || {};
+    navigator.msMaxTouchPoints = navigator.msMaxTouchPoints || 2;
+    navigator.msPointerEnabled = true;
+
+    //navigator.maxTouchPoints = navigator.maxTouchPoints || 2;
+    //window.ontouchstart = window.ontouchstart || function() {console.log('this is touchstart!');};
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=[APIKey]&callback=initMap"
+    async defer></script>
+    <!-- <script type="text/javascript" src="./static/assets/js/googlemap.js?callback=initMap"></script> -->
+    
+    <!-- <script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script> -->
+    <script type="text/javascript" src="./static/assets/js/jquery-2.2.4.min.js"></script>
+    <!-- <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script> -->
+    <script type="text/javascript" src="./static/assets/js/socket.io.min.js"></script>
+    <script type="text/javascript" src="./static/assets/js/t-hub.js"></script>
+
+    <script type="text/javascript" charset="utf-8">
+      
+    </script>
+    
+
+</body>
+
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fire Department Incident Plot</title>
+    <link href="./static/nouislider/nouislider.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./static/assets/css/incidentsStyle.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:100|Shadows+Into+Light|Lato:100i|Zilla+Slab"
+          rel="stylesheet">
+</head>
+
+<body>
+<script src="./static/nouislider/nouislider.js"></script>
+<div id="logo">
+    <img src="https://admissions.vanderbilt.edu/insidedores/manage/wp-content/uploads/vanderbilt-logo-2008.gif"
+         width="45" height="45" style="position:absolute; left: 5px; " />
+    vData
+
+</div>
+
+<!-- Menu sign - wiz animation -->
+<div class="container"  style = "left:18px" onclick="barToX(this)">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+</div>
+
+<!-- <div class="socialMediaBox" style="right:0">
+    <a href="https://github.com/visor-vu/analytics-dashboard" target="_blank"><i class="fa fa-github"></i></a>
+</div> -->
+
+<!-- Ask for user input -->
+<div class="sidenav" id="mySideNav">
+    <a href="http://www.nashville.gov/Fire-Department.aspx" target="_blank">Fire Department</a><br>
+    <b>simple incident</b>
+    <hr style="color: darkgrey; opacity: 1">
+    <br>
+    <ul class="fa-ul" style="margin-left: 53px; margin-right: 5px">
+        <li><i class="fa-li fa fa-file-text"></i>Mongo DB Address:
+            <b>127.0.0/simple-incident</b></li>
+        <li><i class="fa-li fa fa-bar-chart"></i>Chart Options:
+            <b>
+                <button class="buttonChangeMode" onclick="changeMode(0)" style="background-color: #83c985">
+                    📍History</button>
+                <button class="buttonChangeMode" onclick="changeMode(1)">🔭Prediction</button>
+                <button class="buttonChangeMode" onclick="changeMode(2)">🔮Explore</button>
+                <button class="buttonChangeMode" onclick="changeMode(3)">🚒Dispatch</button>
+            </b>
+        </li>
+        <li><i class="fa-li fa fa-code-fork"></i>Version:
+            <b>1.0.2</b>
+        </li>
+    </ul>
+    <br><br><br><br><br><br><br><br><br><br>
+    <div class="popup" onclick="help()">
+        <i class="fa fa-lightbulb-o" style="padding-left:0; font-size: 14px; width: 1.5%"></i>help
+        <span class="popuptext" id="pop">Click on the dots to view more details of an accident</span>
+    </div>
+    <b>visor-vu/2017/analytics dashboard</b><br>
+</div>
+
+<!-- where maps, graphs, charts live -->
+<div class="playground">
+    <!-- map column -->
+    <div class="column" id="mapView" style="width: 1200px">
+
+        <div class="title">
+            Nashville Map
+            <i class="fa fa-arrows-alt" id="enlargeMap" onclick = "enlargeMap()"
+               style="font-size: 16px; float: right; padding: 1px; color: #4eff35; cursor: pointer"></i>
+        </div>
+
+        <div id="initialHint">
+            <i class="fa fa-angle-double-down"></i>
+            <span style="font-size: 17px" id="initialMsgOnMap">Please choose a date interval</span>
+            <span style="font-size: 12px; font-family: 'Helvetica Neue'" id="initialMsgOnMap1">
+                &nbsp;&nbsp;&#x1F538;&nbsp;dates more than 14 days apart will appear golden</span>
+        </div>
+
+<!--         <div class="icon-bar">
+            <label class = switch>
+                <input type="checkbox" id="police" style="opacity: 0" onclick="hidePolice()">
+                <div class = "box" >👮</div>
+            </label>
+            <label class = switch>
+                <input type="checkbox" id="fire" style="opacity: 0" onclick="hideFire()">
+                <div class = "box">👨‍🚒</div>
+            </label>
+        </div> -->
+
+        <div class = "buttonSideMenu" id="showmenu" onclick = "showMenu()">
+            <i class="fa fa-caret-square-o-down" style="font-size: 24px; margin-left: 2px; padding: 3px"></i>
+        </div>
+        <div class = "sidemenu" id="mySideMenu">
+            <div class="loading" style="margin: 40px; color: black">
+                <i class="fa fa-spinner fa-pulse"></i>
+                <span class="loadingMsg">Waiting For User Input</span>
+            </div>
+            <a style="color: black; margin-top: 45px">Summary:</a>
+            <div class="card">
+                <div class="example-val" id="event" style="color: black"></div>
+                <p id="total"></p>
+                <div id="chooseType" style="display: block"></div>
+            </div>
+        </div>
+{#        <div id="popopo" style="display: none"></div>#}
+
+        <div id="map" style="color: black"></div>
+        <div id="floating-panel">
+            <button class="button" style="background-color: lightgoldenrodyellow" id='markers' onclick="toggleMarkers()">
+                Show Incidents</button>
+            <button class="button" style="background-color: azure" id="vehide"onclick="hideVehicles()">
+                Hide Responding Vehicles</button>
+            <button class="button" id='heat' style="background-color: palegreen" onclick="setHeatMap()">
+                Generate new heatmap</button>
+            <button class="button" id='heatHide' style="background-color: palegreen; visibility: hidden" onclick="toggleHeatmap();">
+                Toggle heatmap</button> 
+            <button class="button" id='gradient' style="background-color: palegreen; visibility: hidden" onclick="changeGradient()">
+                Change heatmap gradient</button>
+            <button class="button" id='zone' style="background-color: palegreen; visibility: hidden" onclick="changeZoneLayers()">
+                Toggle Zones</button>
+        </div>
+
+        <div style="width: inherit; position:absolute; top: 20%; text-align: center; z-index: 2">
+            <div id="loader" style="display: none"></div>
+        </div>
+
+        <div id="sliderGround">
+            <div id="sliderNew" style="width: inherit"></div>
+            <div class="input" id="spaceExplore" style="margin-top: 5px; font-family: 'Zilla Slab'"></div>
+            <div class="input" id="inputSingle" style="margin-top: 5px; font-family: 'Zilla Slab'"></div>
+            <div id = "clockRetrain" style="position: absolute; margin-top: -28px; font-family: 'Zilla Slab'; display: none;
+                width: 120px; font-size: 10px">
+                Model Updated at:
+                <div id = "timeNow"></div>
+                <button class="button" style="background-color: lightblue" id="manualRetrainBtn" onclick="setInnerHTML('timeNow', 'time')">
+                    Click to refresh model</button>
+            </div>
+            <div id = "sliderDouble">
+                <div id="slider"></div>
+                <div class="input" style="margin-top: 5px; font-family: 'Zilla Slab'">
+                    &#x1F5D3;&nbsp;
+                    From: <input type="date" min="2014-01-01" max="2016-12-31" value="2014-05-01" id="date1"/>
+                    <input type="time" id="hour1" value="08:00"/>
+                    &nbsp; &nbsp; &nbsp;
+                    To: <input type="date" min="2014-01-01" max="2017-01-01" value="2014-05-20" id="date2"/>
+                    <input type="time" id="hour2" value="16:00"/>
+                    &nbsp; &nbsp; &nbsp;
+                    <button class="button" id="submitDates" onclick="getData()" style = "background-color: goldenrod;
+                    padding: 3px 5px; color: black; font-size: 14px; font-family:'Zilla Slab'" >
+                        Submit dates</button>
+                </div>
+                </br>
+            </div>
+        </div>
+    </div>
+
+    <!-- bar chart column-->
+    <div class="column" id="barView" style="width: 42%; height: 350px">
+        <div class="title">Bar Chart - Level of Severity:</div>
+        <div class="loading" id="loadingBar">
+            <i class="fa fa-spinner fa-pulse"></i>
+            <span class="loadingMsg">Waiting For User Input</span>
+        </div>
+        <div class="card">
+            <div class="bar"></div>
+        </div>
+    </div>
+
+    <!-- pie chart column-->
+    <div class="column" id="pieView" style="width: 50%; height: 350px">
+        <div class="title">Pie Chart - %Types of Incidents:</div>
+        <div class="loading">
+            <i class="fa fa-spinner fa-pulse"></i>
+            <span class="loadingMsg">Waiting For User Input</span>
+        </div>
+        <div class="card">
+            <div id="pieForType" style="width: 610px; height: 360px; margin:0; padding: 0"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+<script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="./static/styles.js"></script>
+<script src="./static/globalArrays.js"></script>
+<script src="./static/incidentscode.js"></script>
+
+<script async defer src=
+        "https://maps.googleapis.com/maps/api/js?key=blank&libraries=visualization&callback=initMap">
+</script>
+
+<div id="bottomHint">
+    <img src="http://static1.squarespace.com/static/545ca278e4b06e0eec9ccf16/t/545fdf08e4b04efe627f55cd/1422271849779/?format=1500w"/>
+    <div style="color:floralwhite;text-align: center">
+        <i class="fa fa-at" style="font-size: 14px; padding: 0; margin: 0"></i> School of Engineering | Vanderbilt University | Nashville, TN
+        <i class="fa fa-github" style="font-size: 14px; padding: 0; margin: 0"></i> visor-vu/dashboard
+    </div>
+</div>
+</body>
+</html>

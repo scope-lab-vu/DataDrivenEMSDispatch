@@ -1,0 +1,24 @@
+
+[Unit]
+Description=FD Incident Database Periodic Transfer
+
+[Service]
+Type=simple
+
+User=fd_dashboard
+Group=fd_dashboard
+
+ExecStart=/home/vol-gpettet/db_update/batch_test.py
+
+StandardOutput=syslog
+StandardError=inherit
+SyslogIdentifier=fd_periodic_update
+SyslogLevel=info
+
+
+Restart=always
+RestartSec=10s
+
+
+[Install]
+WantedBy=multi-user.target
