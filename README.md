@@ -38,7 +38,7 @@ Students --
 
 2.  Ayan Mukhopadhyay
 
-3.  Geoffrey Pettet
+3.  Ava Pettet
 
 4.  Fangzhou Sun
 
